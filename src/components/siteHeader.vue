@@ -1,5 +1,5 @@
 <template>
-  <nav class="siteHeader bg-gray-900 text-gray-500 py-2 px-3 sm:px-4">
+  <nav class="siteHeader bg-teal-900 text-teal-400 py-2 px-3 sm:px-4">
     <!-- test tailwindcss -->
     <div class="container mx-auto sm:flex sm:justify-between sm:items-center">
       <div class="flex justify-between items-center">
@@ -21,7 +21,7 @@
       <!-- menu links -->
       <div :class="menuOpen ? 'block' : 'hidden'" class="menu-links sm:block my-2 sm:my-0">
         <!-- loop through menu links -->
-        <a href="#" class=" block sm:inline hover:bg-gray-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" v-for="link in menulinks" :key="link.linkname">
+        <a href="#" class=" block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" v-for="link in menulinks" :key="link.linkname">
           <span class="text-xs sm:text-sm" :class=link.icon></span>
           <span class="sm:font-semibold ml-1 text-md sm:text-lg">{{link.linkname}}</span>
         </a>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Stonks',
   data: function(){
