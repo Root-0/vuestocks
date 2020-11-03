@@ -16,11 +16,9 @@
 
 export default {
   name: 'App',
-  // components: {
-  //   siteHeader,
-  //   stockList,
-  //   portfolio
-  // }
+  created(){
+    this.$store.dispatch('initStocks');
+  }
 }
 </script>
 

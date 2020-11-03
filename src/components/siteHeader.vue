@@ -1,14 +1,14 @@
 <template>
   <nav class="siteHeader bg-teal-900 text-teal-400 py-2 px-3 sm:px-4">
     <!-- test tailwindcss -->
-    <div class="container mx-auto sm:flex sm:justify-between sm:items-center">
+    <div class="container mx-auto px-3 sm:flex sm:justify-between sm:items-center">
       <div class="flex justify-between items-center">
         <!-- site logo -->
         <div class="siteLogo">
-          <a href="#" class="hover:text-white focus:outline-none">
+          <router-link to="/" class="hover:text-white focus:outline-none">
             <span class="fab fa-modx text-xl"></span>
             <span class="font-semibold ml-1 text-2xl">Stonks</span>
-          </a>
+          </router-link>
         </div>
 
         <!-- mobile menu toggle -->
@@ -21,9 +21,17 @@
       <!-- menu links -->
       <div :class="menuOpen ? 'block' : 'hidden'" class="menu-links sm:block my-2 sm:my-0">
         <!-- loop through menu links -->
-        <a href="#" class=" block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" v-for="link in menulinks" :key="link.linkname">
-          <span class="text-xs sm:text-sm" :class=link.icon></span>
-          <span class="sm:font-semibold ml-1 text-md sm:text-lg">{{link.linkname}}</span>
+        <router-link v-for="link in menulinks" :key="link.linkname" :to="link.linkname">
+          <a class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0">
+            <span class="text-xs sm:text-sm" :class=link.icon></span>
+            <span class="sm:font-semibold ml-1 text-md sm:text-lg">{{link.linkname}}</span>
+          </a>
+        </router-link>
+
+        <!-- other functional buttons on menu -->
+        <a href="javascript:void(0);" class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" v-for="singlebutton in buttons" :key="singlebutton.linkname">
+          <span class="text-xs sm:text-sm" :class=singlebutton.icon></span>
+          <span class="sm:font-semibold ml-1 text-md sm:text-lg">{{singlebutton.linkname}}</span>
         </a>
       </div>
 
@@ -38,12 +46,14 @@ export default {
   name: 'Stonks',
   data: function(){
     return{
-      menuOpen: true,
+      menuOpen: false,
       menulinks: [
         {
           icon: 'fa fa-grip-vertical',
           linkname: 'Portfolio'
-        },
+        }
+      ],
+      buttons: [
         {
           icon: 'fa fa-clock',
           linkname: 'End Day'

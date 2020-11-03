@@ -9,6 +9,9 @@ import App from './App.vue'
 import Vrouter from 'vue-router'
 import { myroutes } from './routes.js'
 
+// add store to mainjs
+import store from './store/store'
+
 Vue.config.productionTip = false
 
 // use router
@@ -21,5 +24,6 @@ const myrouter = new Vrouter({
 
 new Vue({
   render: h => h(App),
-  router : myrouter
+  router : myrouter,
+  store
 }).$mount('#app')
