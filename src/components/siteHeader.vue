@@ -29,7 +29,7 @@
         </router-link>
 
         <!-- other functional buttons on menu -->
-        <a href="javascript:void(0);" class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" v-for="singlebutton in buttons" :key="singlebutton.linkname">
+        <a class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" v-for="singlebutton in buttons" :key="singlebutton.linkname" v-on="singlebutton.linkname == 'End Day' ? { click: () => endDay() } : {click: () => '' }">
           <span class="text-xs sm:text-sm" :class=singlebutton.icon></span>
           <span class="sm:font-semibold ml-1 text-md sm:text-lg">{{singlebutton.linkname}}</span>
         </a>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-
+import {mapActions} from 'vuex';
 export default {
   name: 'Stonks',
   data: function(){
@@ -71,6 +71,15 @@ export default {
   },
   props: {
     msg: String
+  },
+  methods:{
+    ...mapActions({
+      randomiseStocks: 'randomiseStocks'
+    }),
+    endDay: function(){
+      console.log("call endday");
+      this.randomiseStocks();
+    }
   }
 }
 </script>

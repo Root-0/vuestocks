@@ -12,7 +12,10 @@ const mutations = {
 
     // randomise stocks
     'Random_stocks' (state){
-        console.log("inside randomstocks: "+ state);
+        state.stocks.stockList.forEach(singlestock => {
+            // change price of stock
+            singlestock.stock_price = Math.round(singlestock.stock_price * (1 + Math.random() - 0.5));
+        })
     }
 };
 
