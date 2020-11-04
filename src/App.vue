@@ -4,7 +4,9 @@
     <stock-list></stock-list>
     <portfolio></portfolio> -->
 
-    <router-view></router-view>
+    <transition name="appear" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -26,4 +28,29 @@ export default {
 #app {
   box-sizing: border-box;
 }
+.appear-enter-active{
+  animation: appear-in 400ms ease-out forwards;
+}
+
+.appear-leave-active{
+  animation: appear-out 400ms ease-out forwards;
+}
+
+@keyframes appear-in {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+@keyframes appear-out {
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+
 </style>

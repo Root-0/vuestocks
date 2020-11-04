@@ -29,10 +29,29 @@
         </router-link>
 
         <!-- other functional buttons on menu -->
-        <a class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" v-for="singlebutton in buttons" :key="singlebutton.linkname" v-on="singlebutton.linkname == 'End Day' ? { click: () => endDay() } : {click: () => '' }">
+        <!-- <a class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" 
+           v-for="singlebutton in buttons" :key="singlebutton.linkname"
+           v-on="singlebutton.linkname == 'End Day' ? { click: () => endDay() } : {click: () => '' } ;
+                singlebutton.linkname == 'Save' ? { click: () => saveData() } : {click: () => '' }">
           <span class="text-xs sm:text-sm" :class=singlebutton.icon></span>
           <span class="sm:font-semibold ml-1 text-md sm:text-lg">{{singlebutton.linkname}}</span>
+        </a> -->
+
+        <a class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" @click="endDay">
+          <span class="text-xs sm:text-sm fa fa-clock"></span>
+          <span class="sm:font-semibold ml-1 text-md sm:text-lg">End Day</span>
         </a>
+
+        <a class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" @click="saveData">
+          <span class="text-xs sm:text-sm fa fa-save"></span>
+          <span class="sm:font-semibold ml-1 text-md sm:text-lg">Save Data</span>
+        </a>
+
+        <a class="block sm:inline hover:bg-teal-700 p-2 rounded sm:ml-8 mt-1 sm:mt-0" @click="loadData">
+          <span class="text-xs sm:text-sm fa fa-history"></span>
+          <span class="sm:font-semibold ml-1 text-md sm:text-lg">Load Data</span>
+        </a>
+        
       </div>
 
     </div>
@@ -53,20 +72,6 @@ export default {
           linkname: 'Portfolio'
         }
       ],
-      buttons: [
-        {
-          icon: 'fa fa-clock',
-          linkname: 'End Day'
-        },
-        {
-          icon: 'fa fa-save',
-          linkname: 'Save'
-        },
-        {
-          icon: 'fa fa-history',
-          linkname: 'Load'
-        }
-      ]
     }
   },
   props: {
@@ -74,11 +79,25 @@ export default {
   },
   methods:{
     ...mapActions({
-      randomiseStocks: 'randomiseStocks'
+      randomiseStocks: 'randomiseStocks',
+      fetchData: 'loadData'
     }),
     endDay: function(){
       console.log("call endday");
       this.randomiseStocks();
+    },
+    saveData: function(){
+      console.log("saving data....");
+      const data = {
+        funds: this.$store.getters.funds,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        stocks: this.$store.getters.stocks
+      }
+      this.$http.put("data.json", data);
+    }, 
+    loadData: function(){
+      console.log("loading data...");
+      this.fetchData();
     }
   }
 }

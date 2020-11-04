@@ -51,6 +51,10 @@ const mutations = {
         // state.funds += (stockPrice * stockqty);
 
         console.log("FUnds after selling: ", state.funds);
+    },
+    'set_portfolio' (state, portfolio){
+        state.funds = portfolio.funds;
+        state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : []
     }
 }
 
