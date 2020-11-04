@@ -1,7 +1,12 @@
 // tailwind.config.js
 module.exports = {
-    corePlugins: {
-      // ...
-     objectPosition: true,
-    }
+  purge: [
+    './src/**/*.html',
+    './src/**/*.vue',
+    './src/**/*.js',
+  ],
+  corePlugins: {
+    // ...
+    objectPosition: true,
+  }
 }
